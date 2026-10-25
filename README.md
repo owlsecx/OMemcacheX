@@ -18,18 +18,18 @@
 
 ## 📌 Overview
 
-Memcached & Varnish Cache configuration hardening auditor
+OMemcacheX is an offline Memcached and Varnish Cache hardening auditor. It reviews Memcached flags/SASL/TLS/UDP amplification and Varnish daemon options, admin CLI, secrets, jail, and VCL ACL/PURGE/BAN issues. Findings include severity, CWE, and MITRE ATT&CK with grade and TXT/MD/JSON/CSV/SARIF export.
 
 ---
 
 ## ✨ Features
 
-- Offline, read-only Memcached + Varnish Cache auditor
-- Memcached: memcached.conf, sysconfig OPTIONS, units, stats exports, SASL / sasldb / authfile, UDP amp.
-- Varnish: DAEMON_OPTS, varnish.params, varnishd unit, admin CLI -T / -S secret / -j jail / -p params
-- VCL: ACLs, PURGE/BAN, XFF spoofing, cookie/auth caching, httpoxy, pipe, header leaks, inline C
-- Rules with severity / CWE / MITRE ATT&CK, grade A+…F
-- TXT / MD / JSON / CSV / SARIF, --fail-on, --demo
+- Memcached: memcached.conf, sysconfig OPTIONS, units, stats exports, SASL/sasldb/authfile, UDP amplification
+- Varnish: DAEMON_OPTS, varnish.params, varnishd unit, admin CLI `-T`/`-S` secret/`-j` jail/`-p` params
+- VCL review: ACLs, PURGE/BAN, XFF spoofing, cookie/auth caching, httpoxy, pipe, header leaks, inline C
+- Optional version hints for Memcached/Varnish CVE context
+- Rule catalogue with `--list-rules` / `--explain`; hardened templates
+- Multi-format export, secret masking, `--demo` and `--fail-on` / `--min-severity` gates
 
 ---
 
@@ -43,7 +43,10 @@ Memcached & Varnish Cache configuration hardening auditor
 ## 🚀 Usage
 
 ```bash
-./OMemcacheX
+./OMemcacheX -c /etc/memcached.conf --scan
+./OMemcacheX --root ./collected --type varnish -f json -o varnish.json
+./OMemcacheX --demo --fail-on high
+./OMemcacheX --help
 ```
 
 ---
